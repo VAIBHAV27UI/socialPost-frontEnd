@@ -3,13 +3,14 @@ import Sidebar from "./component/Sidebar";
 import Login from "./component/Login";
 import ViewPost from "./component/ViewPost";
 import SignUp from "./component/SignUp";
-import ProtectedRoute from "./utils/protectedRoute";
 import Home from "./component/Home";
 import CreatePost from "./component/CreatePost";
 import ViewOwnPost from "./component/ViewOwnPost";
 import Owner from "./component/Owner";
 import AdminLogin from "./component/AdminLogin";
+import ProtectedRoute from "./utils/ProtectedRoute";
 import ProtectedAdmin from "./utils/ProtectedAdmin";
+
 
 const App = () => {
   return (
