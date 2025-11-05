@@ -36,7 +36,7 @@ const Navbar = ({open, setOpen}) => {
 
   return (
     <>
-      <div className={`flex flex-col max-sm:fixed h-screen max-sm:w-full max-sm:top-0 right-0 max-sm:left-0 transition-all md:bg-black  ${open ? "max-sm:translate-x-0 bg-[rgba(0,0,0,0.9)]" : "max-sm:translate-x-full bg-[rgba(0,0,0,)]" }`}>
+      <div className={`z-50 flex flex-col max-sm:fixed h-screen max-sm:w-full max-sm:top-0 right-0 max-sm:left-0 transition-all md:bg-black  ${open ? "max-sm:translate-x-0 bg-[rgba(0,0,0,0.9)]" : "max-sm:translate-x-full bg-[rgba(0,0,0,)]" }`}>
         <Link to="/">
           <div className="text-white text-5xl text-center border-b-2 border-b-blue-400 py-5 mb-5">
             SocialMedia
