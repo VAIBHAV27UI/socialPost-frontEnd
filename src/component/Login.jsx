@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+
 import API from "../utils/axios";
+import { useDispatch } from "react-redux";
+import { accountSuccess } from "../redux/slice/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const [formData, setFormData] = useState({
     email: "",
@@ -21,7 +25,7 @@ const Login = () => {
       const res = await API.post("/users/login", formData);
 
       if (res.data.success) {
-
+        dispatch(accountSuccess(res.data.user));
         navigate("/");
         alert("Login Successfully");
         localStorage.setItem("token", res.data.token);
@@ -29,7 +33,6 @@ const Login = () => {
       } else {
         alert(res.data.message || "Signup failed");
       }
-
     } catch (error) {
       console.log(error.message);
     }
