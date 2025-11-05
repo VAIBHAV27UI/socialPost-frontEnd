@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../redux/action/postAction";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import PostCard from "./PostCard";
 
 const SkeletonCard = () => (
@@ -14,9 +14,8 @@ const SkeletonCard = () => (
 
 const ViewOwnPost = () => {
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.post);
+  const { posts, loading } = useSelector((state) => state.post);
   const userId = useSelector((state) => state.user.currentUser);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -42,7 +41,7 @@ const ViewOwnPost = () => {
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
-        {isLoading
+        {loading
           ? Array(skeletonCount)
               .fill()
               .map((_, index) => <SkeletonCard key={index} />)
