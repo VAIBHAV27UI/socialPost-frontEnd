@@ -10,9 +10,23 @@ import Owner from "./component/Owner";
 import AdminLogin from "./component/AdminLogin";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import ProtectedAdmin from "./utils/ProtectedAdmin";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { accountSuccess } from "./redux/slice/userSlice";
 
 
 const App = () => {
+
+    const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      dispatch(accountSuccess(JSON.parse(storedUser)));
+    }
+  }, [dispatch]);
+
+
   return (
     <>
       <Routes>

@@ -7,7 +7,7 @@ import { accountSuccess } from "../redux/slice/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,11 +25,17 @@ const Login = () => {
       const res = await API.post("/users/login", formData);
 
       if (res.data.success) {
-        dispatch(accountSuccess(res.data.user));
-        navigate("/");
+        const user = res.data.user;
+        const token = res.data.token;
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
+        dispatch(accountSuccess(user));
+
         alert("Login Successfully");
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        navigate("/");
       } else {
         alert(res.data.message || "Signup failed");
       }
