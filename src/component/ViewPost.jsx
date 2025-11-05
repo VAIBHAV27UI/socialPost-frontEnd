@@ -12,6 +12,12 @@ const ViewPost = ({ title, text }) => {
     dispatch(getAllPosts());
   }, [dispatch]);
 
+  const postStatuses = posts.data?.map((post) => post.status).join(",");
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, [dispatch, postStatuses]);
+
   const otherPost = posts.data?.filter(
     (post) => post.createdBy?._id !== userId.id
   );

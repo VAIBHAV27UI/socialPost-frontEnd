@@ -10,12 +10,17 @@ const ViewOwnPost = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [dispatch]);
+  }, [dispatch, posts]);
 
   const ownpost = posts.data?.filter(
     (post) => post.createdBy?._id === userId.id
   );
 
+  const postStatuses = posts.data?.map((post) => post.status).join(",");
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, [dispatch, postStatuses]);
 
   return (
     <>
