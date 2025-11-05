@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../redux/action/postAction";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import PostCard from "./PostCard";
 
 const ViewOwnPost = () => {
@@ -12,20 +12,25 @@ const ViewOwnPost = () => {
     dispatch(getAllPosts());
   }, [dispatch, posts]);
 
-  const ownpost = posts.data?.filter(
-    (post) => post.createdBy?._id === userId.id
+  const ownPosts = useMemo(() => {
+    return posts.data?.filter((post) => post.createdBy?._id === userId?.id);
+  }, [posts.data, userId]);
+
+  const postStatuses = useMemo(
+    () => posts.data?.map((p) => p.status).join(","),
+    [posts.data]
   );
 
-  const postStatuses = posts.data?.map((post) => post.status).join(",");
-
-  useEffect(() => {
-    dispatch(getAllPosts());
+    useEffect(() => {
+    if (postStatuses) {
+      dispatch(getAllPosts());
+    }
   }, [dispatch, postStatuses]);
 
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
-        {ownpost?.map((data, index) => (
+        {ownPosts?.map((data, index) => (
           <PostCard
             key={index}
             title={data.title}
