@@ -19,11 +19,11 @@ const ViewOwnPost = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [dispatch, posts]);
+  }, [dispatch]);
 
   const ownPosts = useMemo(() => {
-    return posts.data?.filter((post) => post.createdBy?._id === userId?.id);
-  }, [posts.data, userId]);
+    return posts?.data?.filter((post) => post.createdBy?._id === userId?.id);
+  }, [posts?.data, userId]);
 
   const postStatuses = useMemo(
     () => posts.data?.map((p) => p.status).join(","),
